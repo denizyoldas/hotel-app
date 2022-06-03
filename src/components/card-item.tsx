@@ -10,7 +10,8 @@ interface Props {
 
 export default function CardItem({ image, name, price, rating }: Props) {
   return (
-    <div className="card border drop-shadow-sm h-32 w-42 flex items-center rounded-sm bg-white px-2 box-content">
+    <div className="relative card border drop-shadow-sm h-32 w-4/5 min-w-42 flex items-center rounded-sm bg-white px-2 box-content hover:scale-110 transition ease-in-out delay-150">
+      <span className="absolute top-0 right-0 border rounded-full p-2 box-content bg-red-600 text-white">X</span>
       <img src={image} alt={name} className="w-28 h-28 mr-3" />
       <div>
         <h4 className="text-lg font-medium">{name}</h4>
