@@ -4,19 +4,28 @@ import AppContext from '../store/app-context'
 import { Hotel } from '../types.model'
 import CardItem from './card-item'
 
+const PERR_PAGE = 5
+
 export default function CardList() {
   const [hotels, setHotels] = useState<Hotel[]>([])
   const [currentPage, setCurrentPage] = useState<number>(1)
   const appCtx = useContext(AppContext)
 
-  const pageNumbers = [1, 2, 3, 4, 5]
+  const indexOfLastHotel = currentPage * PERR_PAGE
+  const indexOfFirstHotel = indexOfLastHotel - PERR_PAGE
+  const currentHotels = hotels.slice(indexOfFirstHotel, indexOfLastHotel)
+  const pageNumbers = []
+
+  for (let i = 1; i <= Math.ceil(hotels.length / PERR_PAGE); i++) {
+    pageNumbers.push(i)
+  }
 
   useEffect(() => setHotels(appCtx.hotels), [appCtx.hotels])
 
   return (
     <>
-      <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-5 place-items-center">
-        {hotels.map(hotel => (
+      <div className="p-10 grid grid-cols-1 gap-5 place-items-center">
+        {currentHotels.map(hotel => (
           <CardItem
             key={hotel.id}
             id={hotel.id}

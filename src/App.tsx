@@ -1,6 +1,6 @@
 import CardList from './components/card-list'
 // import Header from './components/header'
-import { Plus } from 'phosphor-react'
+import { Check, Plus } from 'phosphor-react'
 import { useCallback, useContext, useState } from 'react'
 import Modal from './components/modal'
 import AppContext from './store/app-context'
@@ -8,6 +8,7 @@ import { nanoid } from 'nanoid'
 
 function App() {
   const [isVisible, setIsVisible] = useState<boolean>(false)
+  const [addIsDone, setAddIsDone] = useState<boolean>(false)
   const [hotelName, setHotelName] = useState<string>('')
   const closeHanlde = useCallback(() => setIsVisible(false), [])
   const appCtx = useContext(AppContext)
@@ -20,7 +21,8 @@ function App() {
       price: '',
       rating: 5
     })
-    setIsVisible(false)
+    // setIsVisible(false)
+    setAddIsDone(true)
     setHotelName('')
   }
 
@@ -57,17 +59,41 @@ function App() {
       </div>
 
       <Modal isVisible={isVisible} onClose={closeHanlde}>
-        <div className="p-6 text-center">
-          <div className="grid grid-cols-1 gap-5 py-8 max-w-sm place-items-center">
-            <input type="text" onChange={t => setHotelName(t.target.value)} />
+        <div className="p-6 pt-10 text-center">
+          <div className="mb-8">
+            <label htmlFor="hotelName" className="block">
+              Otel Adı
+            </label>
+            <input
+              className="mt-2 p-2 rounded-md border border-gray-300"
+              type="text"
+              value={hotelName}
+              onChange={e => setHotelName(e.target.value)}
+              onKeyDown={e => {
+                if (e.key === 'Enter') {
+                  modalSubmitHandle()
+                }
+              }}
+            />
           </div>
-          <button
-            onClick={modalSubmitHandle}
-            type="button"
-            className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-          >
-            Ekle
-          </button>
+          {addIsDone ? (
+            <button
+              onClick={modalSubmitHandle}
+              type="button"
+              className="bg-green-500 text-white font-bold py-2 px-4 rounded-md"
+            >
+              <Check size={28} weight="bold" />
+              EKLENDI
+            </button>
+          ) : (
+            <button
+              onClick={modalSubmitHandle}
+              type="button"
+              className="bg-gradient-to-r from-purple-700 to-blue-500 text-white font-bold py-2 px-4 rounded-md"
+            >
+              EKLE
+            </button>
+          )}
         </div>
       </Modal>
     </div>

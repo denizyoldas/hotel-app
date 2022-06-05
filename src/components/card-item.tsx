@@ -39,7 +39,7 @@ export default function CardItem({ id, image, name, price, rating }: Props) {
   return (
     <>
       <div
-        className="group relative p-4 w-1/2 lg:max-w-full lg:flex border bg-white rounded-md hover:bg-[#f8f9fe] drop-shadow-md"
+        className="group relative p-4 w-full sm:w-1/2 md:w-1/2 lg:max-w-full lg:flex border bg-white rounded-md hover:bg-[#f8f9fe] drop-shadow-md"
         // hover:scale-105 transition ease-in-out duration-300
         onMouseLeave={() => setIsHover(false)}
         onMouseEnter={() => setIsHover(true)}
@@ -63,7 +63,9 @@ export default function CardItem({ id, image, name, price, rating }: Props) {
         ></div>
         <div className=" bg-white p-4 flex flex-col justify-between leading-normal group-hover:bg-[#f8f9fe]">
           <div className="mb-8">
-            <div className="text-gray-900 font-bold text-xl mb-2">{name}</div>
+            <div className="text-gray-900 font-bold text-xl mb-2 break-all">
+              {name}
+            </div>
             <span className="bg-[#f8f9fe] text-[#5bc2c9] w-28 p-1 mt-1 mb-4 font-medium text-sm">
               {rating} Puan
             </span>

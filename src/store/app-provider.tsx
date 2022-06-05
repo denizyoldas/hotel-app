@@ -48,7 +48,7 @@ const appReducer = (state: any, action: any) => {
     case 'ADD':
       return {
         ...state,
-        hotels: [...state.hotels, action.item]
+        hotels: [action.item, ...state.hotels]
       }
     case 'REMOVE':
       const hotels = [...state.hotels]
