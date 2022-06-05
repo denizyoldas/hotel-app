@@ -4,6 +4,7 @@ import cx from 'classnames'
 import Modal from './modal'
 import AppContext from '../store/app-context'
 import { CheckCircle, WarningCircle } from 'phosphor-react'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   id: string
@@ -17,6 +18,8 @@ export default function CardItem({ id, image, name, price, rating }: Props) {
   const [isHover, setIsHover] = useState(false)
   const [deleteModalShown, setDeleteModalShown] = useState<boolean>(false)
   const [isDone, setIsDone] = useState<boolean>(false)
+
+  let navigate = useNavigate()
   const appCtx = useContext(AppContext)
 
   const handleDelete = useCallback(() => {
@@ -57,6 +60,7 @@ export default function CardItem({ id, image, name, price, rating }: Props) {
           </button>
         )}
         <div
+          onClick={() => navigate(`/detail/${id}`)}
           className="h-44 lg:h-auto lg:w-44 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
           style={{ backgroundImage: 'url(' + image + ')' }}
           title="Mountain"
