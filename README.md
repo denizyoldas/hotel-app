@@ -1,31 +1,43 @@
-# Hotel App
+# hotel Booking App
 
-this project bookings hotel app
+Hotel Booking app
 
-i use the [pnpm](https://pnpm.io/tr/) package manager to install the packages
+## Tech Stack
 
-## tools
-
-- React
+- [pnpm](https://pnpm.io/tr/)
+- [tailwindcss](https://tailwindcss.com/)
+- [React](https://tr.reactjs.org/)
 - classnames
-- pnpm package manager
 - prettier
 - lodash
 - nanoid
 - phosphor-react
 - typescript
 
-## getting started
+## Screenshots
 
-install the package
+![main 1](./images/main-screen-1.png)
+![main 2](./images/main-screen-2.png)
+![add screen](./images/add-screen.png)
+![detail screen](./images/detail-screen.png)
+![hover items](./images/hover-items.png)
+![success modal](./images/success-modal.png)
+![delete modal](./images/delete-modal.png)
+
+## Get Started
+
+Install my-project with npm
 
 ```bash
-pnpm install
+    git clone https://github.com/denizyoldas/hotel-app.git
+
+    cd hotel-app
+
+    pnpm Install
+
+    pnpm start
 ```
 
-```bash
-pnpm start
-```
+## Authors
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [@denizyoldas](https://www.github.com/denizyoldas)
