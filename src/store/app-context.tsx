@@ -8,7 +8,8 @@ const AppContext = React.createContext({
   upRating: (id: string) => {},
   downRating: (id: string) => {},
   initialize: (data: { hotels: Hotel[] }) => {},
-  orderByHotel: (orderBy: string) => {}
+  orderByHotel: (orderBy: string) => {},
+  getHotel: (id: string) => {}
 })
 
 export default AppContext

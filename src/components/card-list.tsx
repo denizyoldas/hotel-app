@@ -31,7 +31,6 @@ export default function CardList() {
             id={hotel.id}
             name={hotel.name}
             image={hotel.image}
-            price={hotel.price}
             rating={hotel.rating}
           />
         ))}

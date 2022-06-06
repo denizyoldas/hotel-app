@@ -10,11 +10,10 @@ interface Props {
   id: string
   name: string
   image: string
-  price: number | string
   rating: number | string
 }
 
-export default function CardItem({ id, image, name, price, rating }: Props) {
+export default function CardItem({ id, image, name, rating }: Props) {
   const [isHover, setIsHover] = useState(false)
   const [deleteModalShown, setDeleteModalShown] = useState<boolean>(false)
   const [isDone, setIsDone] = useState<boolean>(false)
@@ -43,7 +42,6 @@ export default function CardItem({ id, image, name, price, rating }: Props) {
     <>
       <div
         className="group relative p-4 w-full sm:w-1/2 md:w-1/2 lg:max-w-full lg:flex border bg-white rounded-md hover:bg-[#f8f9fe] drop-shadow-md"
-        // hover:scale-105 transition ease-in-out duration-300
         onMouseLeave={() => setIsHover(false)}
         onMouseEnter={() => setIsHover(true)}
       >
@@ -60,14 +58,17 @@ export default function CardItem({ id, image, name, price, rating }: Props) {
           </button>
         )}
         <div
-          onClick={() => navigate(`/detail/${id}`)}
-          className="h-44 lg:h-auto lg:w-44 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+          onClick={() => navigate(`/hotel/${id}`)}
+          className="h-44 lg:h-auto lg:w-44 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden cursor-pointer"
           style={{ backgroundImage: 'url(' + image + ')' }}
           title="Mountain"
         ></div>
         <div className=" bg-white p-4 flex flex-col justify-between leading-normal group-hover:bg-[#f8f9fe]">
           <div className="mb-8">
-            <div className="text-gray-900 font-bold text-xl mb-2 break-all">
+            <div
+              className="text-gray-900 font-bold text-xl mb-2 break-all cursor-pointer"
+              onClick={() => navigate(`/hotel/${id}`)}
+            >
               {name}
             </div>
             <span className="bg-[#f8f9fe] text-[#5bc2c9] w-28 p-1 mt-1 mb-4 font-medium text-sm">

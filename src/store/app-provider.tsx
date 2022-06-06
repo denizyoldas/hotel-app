@@ -6,12 +6,14 @@ import AppContext from './app-context'
 
 const APP_STATE_KEY = 'app-state'
 
-const defaultAppState: any = {
+const defaultAppState: { hotels: Hotel[] } = {
   hotels: [
     {
       id: nanoid(),
       name: 'Voyage Hotel',
       image: 'https://picsum.photos/200',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.',
       price: '$20',
       rating: 8,
       location: 'New York'
@@ -20,6 +22,8 @@ const defaultAppState: any = {
       id: nanoid(),
       name: 'Hotel 1',
       image: 'https://picsum.photos/210',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.',
       price: '$20',
       rating: 1,
       location: 'New York'
@@ -28,6 +32,8 @@ const defaultAppState: any = {
       id: nanoid(),
       name: 'Hotel 1',
       image: 'https://picsum.photos/220',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.',
       price: '$20',
       rating: 4,
       location: 'New York'
@@ -36,6 +42,8 @@ const defaultAppState: any = {
       id: nanoid(),
       name: 'Hotel 1',
       image: 'https://picsum.photos/230',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.',
       price: '$20',
       rating: 9,
       location: 'New York'
@@ -132,6 +140,11 @@ const AppProvider = (props: any) => {
     dispatchCartAction({ type: 'ORDER_BY', orderBy })
   }
 
+  const getHotelHandler = (id: string) => {
+    const hotel = appState.hotels.find((hotel: Hotel) => hotel.id === id)
+    return hotel
+  }
+
   const appContext: any = {
     hotels: appState.hotels,
     addHotel: addItemToHotelsHandler,
@@ -139,7 +152,8 @@ const AppProvider = (props: any) => {
     upRating: upRatingHandler,
     downRating: downRatingHandler,
     initialize: initializeHandler,
-    orderByHotel: orderByHotelHandler
+    orderByHotel: orderByHotelHandler,
+    getHotel: getHotelHandler
   }
 
   return (
