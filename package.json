@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "author": "deniz aksu <daksu30@gmail.com>",
-  "description": "hotel rental app",
+  "description": "hotel booking app",
+  "license": "MIT",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",

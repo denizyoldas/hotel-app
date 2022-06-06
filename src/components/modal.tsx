@@ -11,8 +11,6 @@ interface Props {
 }
 
 const Modal: React.FC<Props> = ({ children, isVisible, onClose }) => {
-  // useEffect(() => ,[])
-
   return (
     <>
       <div
@@ -25,7 +23,7 @@ const Modal: React.FC<Props> = ({ children, isVisible, onClose }) => {
         tabIndex={-1}
         aria-hidden="true"
         className={cx(
-          'overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full flex items-center justify-center',
+          'overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal h-screen flex items-center justify-center',
           isVisible ? 'block' : 'hidden'
         )}
       >

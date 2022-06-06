@@ -3,6 +3,7 @@ import { Hotel } from '../types.model'
 
 const AppContext = React.createContext({
   hotels: [],
+  orderBy: 'asc',
   addHotel: (item: Hotel) => {},
   deleteHotel: (id: string) => {},
   upRating: (id: string) => {},

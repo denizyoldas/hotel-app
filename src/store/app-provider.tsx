@@ -6,7 +6,7 @@ import AppContext from './app-context'
 
 const APP_STATE_KEY = 'app-state'
 
-const defaultAppState: { hotels: Hotel[] } = {
+const defaultAppState: { hotels: Hotel[]; orderBy: 'asc' | 'desc' } = {
   hotels: [
     {
       id: nanoid(),
@@ -16,7 +16,8 @@ const defaultAppState: { hotels: Hotel[] } = {
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.',
       price: '$20',
       rating: 8,
-      location: 'New York'
+      location: 'New York',
+      lastUpdated: new Date()
     },
     {
       id: nanoid(),
@@ -26,7 +27,8 @@ const defaultAppState: { hotels: Hotel[] } = {
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.',
       price: '$20',
       rating: 1,
-      location: 'New York'
+      location: 'New York',
+      lastUpdated: new Date()
     },
     {
       id: nanoid(),
@@ -36,7 +38,8 @@ const defaultAppState: { hotels: Hotel[] } = {
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.',
       price: '$20',
       rating: 4,
-      location: 'New York'
+      location: 'New York',
+      lastUpdated: new Date()
     },
     {
       id: nanoid(),
@@ -46,9 +49,11 @@ const defaultAppState: { hotels: Hotel[] } = {
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.',
       price: '$20',
       rating: 9,
-      location: 'New York'
+      location: 'New York',
+      lastUpdated: new Date()
     }
-  ]
+  ],
+  orderBy: 'asc'
 }
 
 const appReducer = (state: any, action: any) => {
@@ -71,6 +76,8 @@ const appReducer = (state: any, action: any) => {
         hotelUp.rating = hotelUp.rating + 1
       }
 
+      hotelUp.lastUpdated = new Date()
+
       return { ...state, hotels: hotelsUp }
 
     case 'DOWN_RATING':
@@ -83,23 +90,24 @@ const appReducer = (state: any, action: any) => {
         hotelDown.rating = hotelDown.rating - 1
       }
 
+      hotelDown.lastUpdated = new Date()
+
       return { ...state, hotels: hotelsDown }
 
     case 'INITIALIZE':
       return { ...state, hotels: action.data.hotels }
 
     case 'ORDER_BY':
-      const hotelsOrder = [...state.hotels]
+      const hotelList = [...state.hotels]
       const orderBy = action.orderBy
-      // ascending order by rating
-      if (orderBy === 'asc') {
-        hotelsOrder.sort((a: Hotel, b: Hotel) => a.rating - b.rating)
-      }
-      // descending order by rating
-      if (orderBy === 'desc') {
-        hotelsOrder.sort((a: Hotel, b: Hotel) => b.rating - a.rating)
-      }
-      return { ...state, hotels: hotelsOrder }
+
+      const hotelsOrder = _.orderBy(
+        hotelList,
+        ['rating', 'lastUpdated'],
+        [orderBy, 'desc']
+      )
+
+      return { ...state, hotels: hotelsOrder, orderBy }
   }
   return defaultAppState
 }
@@ -118,6 +126,7 @@ const AppProvider = (props: any) => {
 
   const addItemToHotelsHandler = (item: Hotel) => {
     dispatchCartAction({ type: 'ADD', item })
+    orderByHotelHandler(appState.orderBy)
   }
 
   const removeHotelsHandler = (id: string) => {
@@ -126,10 +135,12 @@ const AppProvider = (props: any) => {
 
   const upRatingHandler = (id: string) => {
     dispatchCartAction({ type: 'UP_RATING', id })
+    orderByHotelHandler(appState.orderBy)
   }
 
   const downRatingHandler = (id: string) => {
     dispatchCartAction({ type: 'DOWN_RATING', id })
+    orderByHotelHandler(appState.orderBy)
   }
 
   const initializeHandler = (data: { hotels: Hotel[] }) => {

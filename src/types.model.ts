@@ -6,4 +6,5 @@ export interface Hotel {
   rating: number
   description?: string
   location?: string
+  lastUpdated?: Date
 }

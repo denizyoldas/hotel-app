@@ -26,7 +26,7 @@ function App() {
     >
       <Routes location={displayLocation}>
         <Route path="/" element={<Main />} />
-        <Route path="/hotel/new" element={<AddOtel />} />
+        <Route path="/hotel/add" element={<AddOtel />} />
         <Route path="/hotel/:id" element={<Detail />} />
       </Routes>
     </div>

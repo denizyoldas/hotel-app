@@ -20,15 +20,6 @@ export default function Detail() {
   }, [id])
 
   return (
-    // <div className="prose h-screen flex items-center justify-center text-black mx-auto">
-    //   <div className="bg-white border rounded-md drop-shadow-md w-2/3 h-2/3 grid grid-cols-1 mx-auto p-10">
-    //     <img src={detail?.image} className />
-    //     <h1 className="">{detail?.name}</h1>
-    //     <div>{detail?.rating}</div>
-    //     <div>{detail?.price}</div>
-    //     <div>{detail?.description}</div>
-    //   </div>
-    // </div>
     <div className="prose h-screen flex items-center justify-center text-black mx-auto">
       <div className="max-w-sm rounded overflow-hidden shadow-lg">
         <ArrowLeft
